@@ -29,8 +29,8 @@ export function App() {
     const data = new FormData(evento.currentTarget)
     const email = data.get('email')?.toString()
 
-    if (!email) return
-    if (emailsToEnvite.includes(email)) return
+    if (!email) return // se for vazio faz nada
+     if (emailsToEnvite.includes(email)) return // se já existir na lista faz nada
 
     setEmailsToEnvite([...emailsToEnvite, email])
     console.log(email + " - Adicionado")
@@ -103,7 +103,6 @@ export function App() {
       </div>
 
       {/* CRIAÇÃO DO MODAL */}
-
       {isGuestModalOpen && (
         <div className='fixed inset-0 bg-black/80 flex items-center justify-center'>
           <div className="w-[640px] rounded-xl py-5 px-6 shadow-shape bg-zinc-900/90 space-y-5">
