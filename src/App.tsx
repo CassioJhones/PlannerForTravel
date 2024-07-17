@@ -24,15 +24,23 @@ export function App() {
     setIsGuestModalOpen(false);
   }
 
-  function addNewEmailToInvite(evento: FormEvent<HTMLFormElement>) {
+  function AddNewEmailToInvite(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault()
     const data = new FormData(evento.currentTarget)
     const email = data.get('email')?.toString()
 
     if (!email) return
+    if (emailsToEnvite.includes(email)) return
 
     setEmailsToEnvite([...emailsToEnvite, email])
-    console.log(email+" - Adicionado")
+    console.log(email + " - Adicionado")
+
+    evento.currentTarget.reset()
+  }
+
+  function RemoveEmailFromInvites(emailToRemove: string) {
+    const newEmailList = emailsToEnvite.filter(x => x !== emailToRemove)
+    setEmailsToEnvite(newEmailList)
   }
   return (
     <div className="h-screen flex items-center justify-center bg-pattern bg-no-repeat bg-center">
@@ -118,7 +126,7 @@ export function App() {
                 return (
                   <div key={email} className='py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2'>
                     <span className='text-zinc-300'>{email}</span>
-                    <button type='button'>
+                    <button type='button' onClick={() => RemoveEmailFromInvites(email)}>
                       <X className='size-4 text-zinc-400 hover:text-zinc-200' />
                     </button>
                   </div>
@@ -129,7 +137,7 @@ export function App() {
 
             <div className='w-full h-px bg-zinc-800' />
 
-            <form onSubmit={addNewEmailToInvite} className='p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2'>
+            <form onSubmit={AddNewEmailToInvite} className='p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2'>
               <div className='px-2 flex items-center flex-1 gap-2'>
                 <AtSign className='text-zinc-400 size-5' />
                 <input
