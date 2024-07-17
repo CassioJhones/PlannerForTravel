@@ -1,7 +1,8 @@
-import { MapPin, Calendar, ArrowRight, UserRoundPlus, Settings2 } from 'lucide-react'
+import { MapPin, Calendar, ArrowRight, UserRoundPlus, Settings2, Divide, X, Hand } from 'lucide-react'
 import { useState } from 'react'
 export function App() {
   const [isGuestInputOpen, setIsGuestInputOpen] = useState(false)
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
 
   function OpenGuestInput() {
     setIsGuestInputOpen(true);
@@ -9,6 +10,14 @@ export function App() {
 
   function CloseGuestInput() {
     setIsGuestInputOpen(false);
+  }
+
+  function OpenGuestModal() {
+    setIsGuestModalOpen(true);
+  }
+
+  function CloseGuestModal() {
+    setIsGuestModalOpen(false);
   }
   return (
     <div className="h-screen flex items-center justify-center bg-pattern bg-no-repeat bg-center">
@@ -44,13 +53,12 @@ export function App() {
             )}
           </div>
 
-
           {isGuestInputOpen ? (
             <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center shadow-shape gap-3">
-              <div className='flex items-center gap-2 flex-1'>
+              <button type='button' onClick={OpenGuestModal} className='flex items-center gap-2 flex-1'>
                 <UserRoundPlus className='size-5 text-zinc-400' />
-                <input type="text" placeholder="Quem estará na viagem?" className="bg-transparent text-lg placeholder-zinc-400 outline-none" />
-              </div>
+                <span className="text-zinc-400 text-lg flex-1 text-left">Quem estará na viagem?</span>
+              </button>
 
               <div className='w-px h-6 bg-zinc-800' />
 
@@ -70,6 +78,23 @@ export function App() {
           com nossos <a href="#" className="underline text-zinc-300"> termos de uso </a> e <a href="#" className="underline text-zinc-300"> políticas de privacidade</a>.
         </p>
       </div>
+
+      {/* CRIAÇÃO DO MODAL */}
+
+      {isGuestModalOpen && (
+        <div className='fixed inset-0 bg-black/80 flex items-center justify-center'>
+          <div className="w-[640px] rounded-xl py-5 px-6 shadow-shape bg-zinc-900/90">
+            <div className="flex items-center justify-between">
+              <h2>Selecionar Convidados</h2>
+              <button>
+                <X onClick={CloseGuestModal} className='size-5  text-zinc-400' />
+
+              </button>
+            </div>
+          </div>
+
+        </div>
+      )}
     </div>
   )
 }
