@@ -1,8 +1,12 @@
 import { MapPin, Calendar, ArrowRight, UserRoundPlus, Settings2, Divide, X, Hand, AtSign, Plus } from 'lucide-react'
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 export function App() {
   const [isGuestInputOpen, setIsGuestInputOpen] = useState(false)
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
+  const [emailsToEnvite, setEmailsToEnvite] = useState([
+    'cassioDeveloper@gmail.com',
+    'cassioJhones@live.com',
+  ])
 
   function OpenGuestInput() {
     setIsGuestInputOpen(true);
@@ -18,6 +22,17 @@ export function App() {
 
   function CloseGuestModal() {
     setIsGuestModalOpen(false);
+  }
+
+  function addNewEmailToInvite(evento: FormEvent<HTMLFormElement>) {
+    evento.preventDefault()
+    const data = new FormData(evento.currentTarget)
+    const email = data.get('email')?.toString()
+
+    if (!email) return
+
+    setEmailsToEnvite([...emailsToEnvite, email])
+    console.log(email+" - Adicionado")
   }
   return (
     <div className="h-screen flex items-center justify-center bg-pattern bg-no-repeat bg-center">
@@ -97,37 +112,33 @@ export function App() {
             </div>
 
             <div className='flex flex-wrap gap-2'>  {/* EMAILS */}
-              <div className='py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2'>
-                <span className='text-zinc-300'>cassio.bjhones@gmail.com</span>
-                <button>
-                  <X />
-                </button>
-              </div>
 
-              <div className='py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2'>
-                <span className='text-zinc-300'>cassio.TESTE@gmail.com</span>
-                <button>
-                  <X />
-                </button>
-              </div>
-
-              <div className='py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2'>
-                <span className='text-zinc-300'>cassio.developer@gmail.com</span>
-                <button>
-                  <X />
-                </button>
-              </div>
+              {emailsToEnvite.map(email => {
+                {/* PARA CADA ITEM DESSE ARRAY ELE CRIA ESSA DIV COM ITENS */ }
+                return (
+                  <div key={email} className='py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2'>
+                    <span className='text-zinc-300'>{email}</span>
+                    <button type='button'>
+                      <X className='size-4 text-zinc-400 hover:text-zinc-200' />
+                    </button>
+                  </div>
+                )
+              })}
 
             </div>
 
             <div className='w-full h-px bg-zinc-800' />
 
-            <form className='p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2'>
+            <form onSubmit={addNewEmailToInvite} className='p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2'>
               <div className='px-2 flex items-center flex-1 gap-2'>
                 <AtSign className='text-zinc-400 size-5' />
-                <input type="text" placeholder="Digite o e-mail do convidado" className="bg-transparent text-lg placeholder-zinc-400 w-40 outline-none flex-1" />
+                <input
+                  type="email"
+                  name='email'
+                  placeholder="Digite o e-mail do convidado"
+                  className="bg-transparent text-lg placeholder-zinc-400 w-40 outline-none flex-1" />
               </div>
-              <button className='bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400'>
+              <button type='submit' className='bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400'>
                 Convidar
                 <Plus className='size-5' />
               </button>
