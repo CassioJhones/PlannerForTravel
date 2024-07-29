@@ -1,3 +1,3 @@
 export function TripDetailsPage(){
-  return <h1>tripdetails</h1>
+  return <h1>PAGINA DE DETALHES</h1>
 }
