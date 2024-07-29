@@ -1,13 +1,14 @@
 import { X, User, Mail, Check } from "lucide-react";
 import type { FormEvent } from "react";
 
+//-- Interface com as propriedades que vem do componente pai
 interface ConfirmTripModalProps {
   CloseConfirmTripModal: () => void
   CreateTrip: (evento: FormEvent<HTMLFormElement>) => void
 }
 
 export function ConfirmTripModal({
-  CloseConfirmTripModal,CreateTrip
+  CloseConfirmTripModal, CreateTrip
 }: ConfirmTripModalProps) {
   return (
     <div className='fixed inset-0 bg-black/80 flex items-center justify-center'>
