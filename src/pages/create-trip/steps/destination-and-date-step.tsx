@@ -1,4 +1,5 @@
 import { MapPin, Calendar, Settings2, ArrowRight } from "lucide-react";
+import { Button } from "../../../components/button";
 
 //-- Interface com as propriedades que vem do componente pai
 interface DestinationAndDateSTepProps {
@@ -24,15 +25,17 @@ export function DestinationAndDateSTep({
       <div className='w-px h-6 bg-zinc-800' />
 
       {isGuestInputOpen ? (
-        <button onClick={CloseGuestInput} className='bg-zinc-800 text-zinc-200 rounded-lg px-3 py-2 font-medium flex items-center gap-2 hover:bg-zinc-700'>
+        <Button onClick={CloseGuestInput} Cor="cinza" Tamanho="padrao">
           Alterar local/data
           <Settings2 className='size-5' />
-        </button>
+        </Button>
       ) : (
-        <button onClick={OpenGuestInput} className='bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400'>
+        <Button onClick={OpenGuestInput} Cor="verde" Tamanho="padrao">
           Continuar
           <ArrowRight className='size-5' />
-        </button>
+        </Button>
+
+
       )}
     </div>
 
