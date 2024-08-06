@@ -5,12 +5,12 @@ import { Button } from "../../components/button";
 //-- Interface com as propriedades que vem do componente pai
 interface ConfirmTripModalProps {
   CloseConfirmTripModal: () => void
+  setOwnerName: (nome: string) => void
+  setOwnerEmail: (email: string) => void
   CreateTrip: (evento: FormEvent<HTMLFormElement>) => void
 }
 
-export function ConfirmTripModal({
-  CloseConfirmTripModal, CreateTrip
-}: ConfirmTripModalProps) {
+export function ConfirmTripModal({ CloseConfirmTripModal, CreateTrip, setOwnerName, setOwnerEmail }: ConfirmTripModalProps) {
   return (
     <div className='fixed inset-0 bg-black/80 flex items-center justify-center'>
       <div className="w-[640px] rounded-xl py-5 px-6 shadow-shape bg-zinc-900/90 space-y-5">
@@ -32,6 +32,7 @@ export function ConfirmTripModal({
             <input
               type="text" name='name'
               placeholder="Seu nome completo"
+              onChange={evento => setOwnerName(evento.target.value)}
               className="bg-transparent text-lg placeholder-zinc-400 w-40 outline-none flex-1" />
           </div>
 
@@ -40,6 +41,7 @@ export function ConfirmTripModal({
             <input
               type="email" name='email'
               placeholder="Seu email pessoal"
+              onChange={evento => setOwnerEmail(evento.target.value)}
               className="bg-transparent text-lg placeholder-zinc-400 w-40 outline-none flex-1" />
           </div>
 
