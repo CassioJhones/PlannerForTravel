@@ -26,9 +26,8 @@ export function Guests() {
 
         {participants.map((convidado,index) => {
           return (
-
-            <div className="flex items-center justify-between gap-4">
-              <div key={convidado.id} className="space-y-1.5">
+            <div key={convidado.id} className="flex items-center justify-between gap-4">
+              <div className="space-y-1.5">
                 <span className="block font-medium text-zinc-100">{convidado.name?? `Convidado ${index}`}</span>
                 <span className="block text-sm text-zinc-400 truncate">
                   {convidado.email}
