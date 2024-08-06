@@ -24,9 +24,8 @@ export function DestinationAndDateSTep({ isGuestInputOpen, CloseGuestInput, Open
   }
 
   const DataExibida = eventStartDate && eventStartDate.from && eventStartDate.to
-    ? format(eventStartDate.from, 'd').concat(' até ').concat(format(eventStartDate.to, "d ' de ' LLL"))
+    ? format(eventStartDate.from, "d' de ' LLL").concat(' até ').concat(format(eventStartDate.to, "d ' de ' LLL"))
     : null
-
 
   return (
     <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center shadow-shape gap-3">
@@ -35,9 +34,9 @@ export function DestinationAndDateSTep({ isGuestInputOpen, CloseGuestInput, Open
         <input disabled={isGuestInputOpen} type="text" placeholder="Para onde você vai?" className="bg-transparent text-lg placeholder-zinc-400 outline-none" />
       </div>
 
-      <button onClick={OpenDatePicker} disabled={isGuestInputOpen} className='flex items-center gap-2 text-left'>
+      <button onClick={OpenDatePicker} disabled={isGuestInputOpen} className='flex items-center gap-2 text-left w-[240px]'>
         <Calendar className='size-5 text-zinc-400' />
-        <span className="text-lg text-zinc-400 w-40" >
+        <span className="text-lg text-zinc-400 w-40 flex-1" >
           {DataExibida || 'Quando?'}
         </span>
       </button>
@@ -55,7 +54,6 @@ export function DestinationAndDateSTep({ isGuestInputOpen, CloseGuestInput, Open
 
             </div>
 
-            <h1>oi</h1>
             <DayPicker mode="range" selected={eventStartDate} onSelect={setEventStartDate} />
           </div>
         </div>
